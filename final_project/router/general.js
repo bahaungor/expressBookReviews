@@ -7,10 +7,9 @@ const public_users = express.Router();
 
 public_users.post("/register", (req,res) => {
   const { username, password } = req.body
-  console.log(req.body)
   if (!username || !password) {
     res.status(400).json({message: 'You should provide both username & password'})
-  } else if (users.map(user => user.username).includes(username)) {
+  } else if (isValid(username)) {
     res.status(400).json({message: 'Username already taken'})
   } else {
     users.push({username, password})
